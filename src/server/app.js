@@ -97,17 +97,7 @@ module.exports = async (client) => {
 
     server.get('/avatar', async (req, res) => {
         try {
-            const avatarUrl = client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 });
-            const base64 = await require('../util/imageUrlToBase64')(avatarUrl);
-            const imgBuffer = Buffer.from(base64.replace(/^data:image\/png;base64,/, ''), 'base64');
-    
-            res.set({
-                'Content-Type': 'image/png',
-                'Access-Control-Allow-Origin': '*', 
-                'Cache-Control': 'public, max-age=60',
-            });
-    
-            res.send(imgBuffer);
+            res.redirect(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }));
         } catch (e) {
             console.error(e);
             res.status(500).send('Gagal memuat avatar');
