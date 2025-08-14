@@ -95,7 +95,7 @@ module.exports = async (client) => {
 
     server.get('/avatar', async (req, res) => {
         try {
-            const imgBuffer = Buffer.from(await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })), 'base64');
+            const imgBuffer = Buffer.from((await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }))).replace('data:image/png;base64,',''), 'base64');
 
             res.set('Content-Type', 'image/png');
             res.send(imgBuffer);
