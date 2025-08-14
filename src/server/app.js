@@ -86,11 +86,20 @@ module.exports = async (client) => {
         });
     });
 
-    server.get("/test", async (req, res) => { 
+    server.get("/test", async (req, res) => {
         res.json({
             status: 200,
             message: "OK!"
         });
+    });
+
+    app.get('/avatar', async (req, res) => {
+        try {
+            const imgBuffer = Buffer.from(await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })), 'base64');
+
+            res.set('Content-Type', 'image/png');
+            res.send(imgBuffer);
+        } catch (error) { res.json({ status: 200, message: 'Gagal memuat gambar.' }) }
     });
 
     let port = process.env.PORT || 4000;
