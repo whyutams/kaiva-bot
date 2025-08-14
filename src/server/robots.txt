@@ -1,0 +1,3 @@
+Sitemap: https://kaiva.vercel.app/sitemap.xml
+User-agent: *
+Allow: /

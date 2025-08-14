@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: kaiva-bot
+    env: node
+    plan: free
+    buildCommand: 'npm install'
+    startCommand: 'node src/main.js'
+    envVars: 
+      - key: REGISTRATION_COMMANDS
+        value: "1"
+      - key: REGISTRATION_COMMANDS_TYPE
+        value: "2"
+      - key: CLIENT_ID
+        value: "1391827758946189312"
+      - key: DEVELOPER_ID
+        value: "691656210835046460"
+ 

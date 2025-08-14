@@ -1,0 +1,50 @@
+<nav class="fixed w-full z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center space-x-3">
+                <img src="<%= avatar %>" alt=""
+                    class="w-10 h-10 rounded-full shadow flex items-center justify-center bg-slate-200">
+
+                <span class="text-xl font-semibold text-white">Kaiva</span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="<%= is_commands_page ? '/' : '' %>#home" class="text-gray-300 hover:text-discord transition-colors smooth-scroll">Beranda</a>
+                <a href="<%= is_commands_page ? '/' : '' %>#feature"
+                    class="text-gray-300 hover:text-discord transition-colors smooth-scroll">Fitur</a>
+                <a href="<%= is_commands_page ? '/' : '' %>#command"
+                    class="text-gray-300 hover:text-discord transition-colors smooth-scroll">Command</a>
+                <a href="<%= is_commands_page ? '/' : '' %>#tutorial"
+                    class="text-gray-300 hover:text-discord transition-colors smooth-scroll">Tutorial</a>
+
+                <a href="<%= invite_url %>" target="_blank"
+                    class="discord-primary text-white px-4 py-2 rounded-xl transition-all duration-300 hover:shadow-lg">
+                    Invite Kaiva
+                </a>
+            </div>
+
+            <button class="md:hidden text-white" id="mobile-menu-btn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div class="md:hidden hidden pb-3" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-gray-800 border-t border-gray-700 rounded-lg mt-2">
+                <a href="<%= is_commands_page ? '/' : '' %>#home" class="block px-3 py-2 text-gray-300 hover:text-discord smooth-scroll">Beranda</a>
+                <a href="<%= is_commands_page ? '/' : '' %>#feature" class="block px-3 py-2 text-gray-300 hover:text-discord smooth-scroll">Fitur</a>
+                <a href="<%= is_commands_page ? '/' : '' %>#command"
+                    class="block px-3 py-2 text-gray-300 hover:text-discord smooth-scroll">Command</a>
+                <a href="<%= is_commands_page ? '/' : '' %>#tutorial"
+                    class="block px-3 py-2 text-gray-300 hover:text-discord smooth-scroll">Tutorial</a>
+
+                <a href="<%= invite_url %>" target="_blank"
+                    class="discord-primary text-white block w-auto px-4 py-2 rounded-xl transition-all duration-300 hover:shadow-lg">
+                    Invite Kaiva
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

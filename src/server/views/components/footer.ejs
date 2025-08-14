@@ -1,0 +1,238 @@
+<footer class="bg-gray-900 border-t border-gray-800 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Logo & Description -->
+            <div class="md:col-span-2">
+                <div class="flex items-center space-x-3 mb-4">
+                    <img src="<%= avatar %>" alt=""
+                        class="w-10 h-10 rounded-full shadow flex items-center justify-center bg-slate-200">
+                    <span class="text-xl font-semibold text-white">Kaiva</span>
+                </div>
+                <p class="text-gray-400 mb-6 max-w-md text-justify">
+                    Kaiva adalah bot Discord yang diciptakan khusus untuk komunitas Indonesia. Mudah digunakan,
+                    penuh
+                    fitur, dan siap meramaikan server Anda!
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="<%= invite_url %>" target="_blank" class="hover:text-discord transition-colors">Invite
+                            Kaiva</a></li>
+                    <li><a href="#" class="hover:text-discord transition-colors">Statistik Bot</a></li>
+                    <li><a href="#tutorial" class="hover:text-discord transition-colors">Tutorial</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-discord transition-colors">Syarat Layanan</a></li>
+                    <li><a href="#" class="hover:text-discord transition-colors">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div
+            class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 inline-flex items-center justify-center gap-1 w-full text-xs md:text-base">
+            &copy; 2025 Kaiva. All rights reserved. Made with ❤️ by
+            <img src="<%= developer.avatar %>" alt="" class="w-5 h-5 md:w-6 md:h-6 rounded-full shadow bg-slate-200">
+            <%= developer.username %>.
+        </div>
+
+        <div class="flex justify-center">
+            <a href="https://instagram.com/whyutams_" target="_blank"
+                class="text-center text-gray-400 hover:text-discord inline-flex items-center justify-center gap-1 text-xs md:text-base">
+                Follow me on <i class="fa-brands fa-instagram"></i> Instagram @whyutams_
+            </a>
+        </div>
+
+    </div>
+</footer>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    createCircularImage("<%= avatar %>", 64, function (faviconUrl) {
+        const link = document.createElement("link");
+        link.rel = "icon";
+        link.type = "image/png";
+        link.href = faviconUrl;
+        document.head.appendChild(link);
+    });
+
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 100
+    });
+
+    $(document).ready(function () {
+        $('#mobile-menu-btn').click(function () {
+            $('#mobile-menu').toggleClass('hidden');
+        });
+
+        <% if(!is_commands_page) {%>
+
+        $('.smooth-scroll').click(function (e) {
+            e.preventDefault();
+            const target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 80
+                }, 800);
+            }
+
+            $('#mobile-menu').addClass('hidden');
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('nav').addClass('bg-gray-900/95 border-gray-700').removeClass('bg-gray-900/90 border-gray-800');
+            } else {
+                $('nav').addClass('bg-gray-900/90 border-gray-800').removeClass('bg-gray-900/95 border-gray-700');
+            }
+        });
+
+        function animateCounter($element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(function () {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                $element.text(Math.floor(current).toLocaleString());
+            }, 20);
+        }
+
+        let statsAnimated = false;
+        $(window).scroll(function () {
+            const statsSection = $('.counter').first().closest('section');
+            if (statsSection.length && !statsAnimated) {
+                const sectionTop = statsSection.offset().top;
+                const windowTop = $(window).scrollTop();
+                const windowHeight = $(window).height();
+
+                if (windowTop + windowHeight > sectionTop + 200) {
+                    statsAnimated = true;
+                    $('.counter').each(function () {
+                        const $this = $(this);
+                        const target = parseInt($this.data('target'));
+                        if (target) {
+                            animateCounter($this, target);
+                        }
+                    });
+                }
+            }
+        });
+
+        $('button').click(function () {
+            const $this = $(this);
+            $this.addClass('transform scale-95');
+            setTimeout(() => {
+                $this.removeClass('transform scale-95');
+            }, 150);
+        });
+
+        $('.card-shadow').hover(
+            function () {
+                $(this).addClass('transform -translate-y-2');
+            },
+            function () {
+                $(this).removeClass('transform -translate-y-2');
+            }
+        );
+
+        $(window).scroll(function () {
+            const scrolled = $(this).scrollTop();
+            const parallax = $('#home');
+            const speed = scrolled * 0.1;
+            parallax.css('transform', 'translateY(' + speed + 'px)');
+        });
+
+        function fadeInOnScroll() {
+            $('.card-shadow').each(function () {
+                const elementTop = $(this).offset().top;
+                const elementBottom = elementTop + $(this).outerHeight();
+                const viewportTop = $(window).scrollTop();
+                const viewportBottom = viewportTop + $(window).height();
+
+                if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                    $(this).addClass('opacity-100').removeClass('opacity-0');
+                }
+            });
+        }
+
+        $('.card-shadow').addClass('opacity-0 transition-opacity duration-1000');
+
+        $(window).scroll(fadeInOnScroll);
+        fadeInOnScroll();
+
+        $('[data-aos="fade-up"]').hover(
+            function () {
+                $(this).addClass('transform scale-105');
+            },
+            function () {
+                $(this).removeClass('transform scale-105');
+            }
+        );
+
+        const sections = $('section');
+        const navLinks = $('nav a.smooth-scroll');
+
+        function setActiveNav() {
+                let currentPos = $(window).scrollTop() + 100;
+                let found = false;
+
+                sections.each(function () {
+                    const top = $(this).offset().top;
+                    const bottom = top + $(this).outerHeight();
+
+                    if (currentPos >= top && currentPos <= bottom) {
+                        const id = $(this).attr('id');
+                        navLinks.removeClass('text-discord').addClass('text-gray-300');
+                        navLinks.filter('[href="#' + id + '"]')
+                            .removeClass('text-gray-300')
+                            .addClass('text-discord');
+                        found = true;
+                    }
+                });
+
+                if (!found && currentPos < sections.first().offset().top) {
+                    navLinks.removeClass('text-discord').addClass('text-gray-300');
+                    navLinks.filter('[href="#home"]')
+                        .removeClass('text-gray-300')
+                        .addClass('text-discord');
+                }
+        }
+
+        $(window).on('scroll', setActiveNav);
+        setActiveNav();
+
+        $(window).on('scroll', function () {
+            try {
+                let scrollPos = $(document).scrollTop();
+                $('nav a').each(function () {
+                    let currLink = $(this);
+                    let refElement = $(currLink.attr('href'));
+
+                    if (refElement.length) {
+                        let sectionTop = refElement.offset().top - 100;
+                        let sectionBottom = sectionTop + refElement.outerHeight();
+
+                        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                            $('nav a').removeClass('active text-discord');
+                            currLink.addClass('active text-discord');
+                        }
+                    }
+                });
+            } catch (error) { }
+        });
+        <% }%>
+    });
+</script>
+<script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'96efc6b361a99c74',t:'MTc1NTE2NzQxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>

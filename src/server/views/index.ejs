@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaiva - Bot Discord Indonesia</title>
+    <%- include('components/head') %>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <%- include('components/nav') %>
+
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto text-center py-[6rem] md:py-[9rem]">
+            <div data-aos="fade-up" data-aos-duration="800">
+
+                <img src="<%= avatar_hd %>" alt=""
+                    class="md:w-48 md:h-48 w-36 h-36 mx-auto mb-6 rounded-full border-4 border-white shadow-lg bg-slate-200">
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    Kaiva Bot Discord <span class="text-discord">Indonesia</span>
+                </h1>
+
+                <p class="text-base md:text-lg text-gray-300 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Kaiva adalah bot Discord yang diciptakan khusus untuk komunitas Indonesia. Mudah digunakan, penuh
+                    fitur, dan siap meramaikan server Anda!
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-2 justify-center">
+                    <a href="<%= invite_url %>" target="_blank"
+                        class="discord-primary text-white px-12 py-3 rounded-xl font-semibold text-base transition-all duration-300 hover:shadow-lg text-center">
+                        Invite Kaiva Sekarang
+                    </a>
+                    <a href="#tutorial"
+                        class="bg-transparent border-2 border-white hover:bg-white hover:text-discord text-white px-12 py-3 rounded-xl font-semibold text-base transition-all duration-300 hover:shadow-lg text-center">
+                        Tutorial
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-20" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                <div class="grid grid-cols-3 md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-8 md:mb-0">
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-discord counter" data-target="<%= server_count %>">0</div>
+                        <div class="text-gray-400 mt-2">Server</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-discord counter" data-target="<%= user_count %>">0</div>
+                        <div class="text-gray-400 mt-2">Pengguna</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-discord counter" data-target="<%= slash_commands.length %>">
+                            0</div>
+                        <div class="text-gray-400 mt-2">Commands</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="feature" class="py-24 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    Fitur
+                </h2>
+                <p class="text-base md:text-lg text-gray-300 max-w-3xl mx-auto">
+                    Saat ini, Kaiva sudah dibekali dengan fitur utilitas dan hiburan seru untuk menemani keseharian Anda
+                    di Discord!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 md:text-left text-center" data-aos="fade-up">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Utilitas</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Kumpulan fitur berguna seperti alat bantu
+                        menampilkan informasi yang siap mempermudah aktivitas Anda di Discord.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2 md:inline flex justify-center" data-aos="fade-up">
+                    <img src="img/utilitas.png" alt="Utilitas"
+                        class="rounded-2xl shadow-lg border border-gray-600 bg-slate-200 sm:max-w-[22rem] md:max-w-lg">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-16">
+                <div class="order-1 md:order-2 md:inline flex justify-center" data-aos="fade-up">
+                    <img src="img/hiburan.png" alt="Hiburan"
+                        class="rounded-2xl shadow-lg border border-gray-600 bg-slate-200 sm:max-w-[22rem] md:max-w-lg">
+                </div>
+                <div class="order-2 md:order-1 md:text-left text-center" data-aos="fade-up">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Hiburan</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Berbagai command interaksi menarik yang membuat suasana
+                        server lebih hidup dan menyenangkan.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="command" class="py-24 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    Seluruh Command
+                </h2>
+                <p class="text-base md:text-lg text-gray-300 max-w-3xl mx-auto">
+                    Berikut adalah seluruh informasi command yang tersedia di bot Kaiva.
+                </p>
+            </div>
+
+            <% if(slash_commands.length > 0) {%>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    <% slash_commands.slice(0, 8).forEach(function(cmd, i){ %>
+                        <div class="bg-gray-800 rounded-xl p-6 hover:bg-gray-700 transition-colors duration-300 border border-gray-700"
+                            data-aos="fade-up" data-aos-delay="<%= i*100 %>">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-discord text-white px-3 py-1 rounded-lg font-mono text-xs">
+                                    /<%= cmd.name %>
+                                </span>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-2"><%= cmd.name.replaceAll('-', ' ').split(' ').map(x => x.slice(0,1).toUpperCase()+x.slice(1)).join(' ') %></h3>
+                            <p class="text-gray-300 text-sm mb-4">
+                                <%= cmd.description %>
+                            </p>
+
+                            <% if(cmd.options.length > 0){ %>
+                                <div class="text-xs font-bold">Options:</div>
+                                <ul class="">
+                                    <% cmd.options.forEach(function (opt) { %>
+                                        <li class="text-gray-300 my-1">
+                                            <small class="text-white bg-gray-500 px-2 py-1" style="border-radius: 4px;"><%= opt.name %><% if(opt.required) { %><span class="text-sm font-bold" style="color: rgb(255, 65, 65) !important;"> *</span> <% } %></small>
+                                            <small class=""><% if(opt.required) { %>&nbsp; <% } %><%= opt.description %></small>
+                                        </li>
+                                    <% }) %>
+                                </ul>
+                            <% } %>
+                        </div>
+                        <% }) %>
+                    </div>
+                    <div class="flex justify-center" data-aos="zoom-in" data-aos-delay="900">
+                        <a href="/commands"
+                        class="discord-primary text-white px-12 py-3 rounded-xl font-semibold text-base transition-all duration-300 hover:shadow-lg">
+                        Lihat Semua Command
+                    </a>
+                    </div>
+                <% } else { %>
+                    <div class="flex justify-center" data-aos="fade-up">
+                        <small class="text-slate-400 text-center">Command tidak tersedia.</small>
+                    </div>
+                    <% } %>
+        </div>
+    </section>
+
+    <section id="tutorial" class="py-24 bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    Cara Menggunakan Kaiva?
+                </h2>
+                <p class="text-base md:text-lg text-gray-300 mb-12 max-w-3xl mx-auto">
+                    Invite Kaiva ke server Anda dan nikmati berbagai fitur yang disediakan hanya dengan beberapa langkah sederhana.
+                </p>
+
+                <div class="space-y-6"> 
+                    <div class="flex justify-center">
+                        <a href="<%= invite_url %>" target="_blank"
+                            class="discord-primary text-white px-12 py-3 rounded-xl font-semibold text-base transition-all duration-300 hover:shadow-lg">
+                            Invite Kaiva
+                        </a>
+                    </div>
+
+                    <div class="text-gray-400 text-xs">
+                        ✅ Gratis • ✅ Support 24/7 • ✅ Berbahasa Indonesia
+                    </div>
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-center">
+                    <div class="w-16 h-16 discord-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-lg">1</span>
+                    </div>
+                    <h3 class="text-base font-semibold text-white mb-2">Klik Invite</h3>
+                    <p class="text-gray-300 text-sm">
+                        Klik tombol invite dan pilih server Anda
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 discord-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-lg">2</span>
+                    </div>
+                    <h3 class="text-base font-semibold text-white mb-2">Berikan Izin</h3>
+                    <p class="text-gray-300 text-sm">
+                        Berikan izin yang diperlukan untuk Kaiva
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 discord-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-lg">3</span>
+                    </div>
+                    <h3 class="text-base font-semibold text-white mb-2">Mulai Gunakan</h3>
+                    <p class="text-gray-300 text-sm">
+                        Ketik /help untuk melihat semua perintah
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('components/footer') %>
+
+</body>
+
+</html>
