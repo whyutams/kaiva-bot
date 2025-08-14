@@ -86,31 +86,10 @@ module.exports = async (client) => {
         });
     });
 
-    server.get("/info", async (req, res) => {
-        if (owner === null) {
-            try {
-                owner = await client.users.fetch(process.env.DEVELOPER_ID);
-            } catch (e) {
-                console.error("Gagal fetch developer:", e);
-            }
-        }
-
+    server.get("/test", async (req, res) => { 
         res.json({
-            id: client.user.id,
-            username: client.user.username,
-            avatar: await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false })),
-            avatar_hd: await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
-            server_count: client.guilds.cache.size,
-            user_count: client.guilds.cache.reduce((acc, g) => acc + g.memberCount, 100),
-            version: client.botVersion,
-            developer: {
-                id: owner?.id,
-                username: owner?.username,
-                avatar: await require('../util/imageUrlToBase64')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false })),
-                avatar_hd: await require('../util/imageUrlToBase64')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
-            },
-            slash_commands: client.slashCommandsJSON,
-            invite_url: client.inviteUrl,
+            status: 200,
+            message: "OK!"
         });
     });
 
