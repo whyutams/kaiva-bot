@@ -1,12 +1,12 @@
 <nav class="fixed w-full z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-800">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
-            <div class="flex items-center space-x-3">
+            <a href="/#" class="flex items-center space-x-3.5">
                 <img src="<%= avatar %>" alt=""
                     class="w-10 h-10 rounded-full shadow flex items-center justify-center bg-slate-200">
 
-                <span class="text-xl font-semibold text-white">Kaiva</span>
-            </div>
+                <span class="text-xl font-semibold text-white hover:text-discord transition-all">Kaiva</span>
+            </a>
 
             <div class="hidden md:flex items-center space-x-8">
                 <a href="<%= is_commands_page ? '/' : '' %>#home" class="text-gray-300 hover:text-discord transition-colors smooth-scroll">Beranda</a>
