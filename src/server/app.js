@@ -93,7 +93,7 @@ module.exports = async (client) => {
         });
     });
 
-    app.get('/avatar', async (req, res) => {
+    server.get('/avatar', async (req, res) => {
         try {
             const imgBuffer = Buffer.from(await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })), 'base64');
 
