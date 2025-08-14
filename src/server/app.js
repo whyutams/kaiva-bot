@@ -1,6 +1,7 @@
 require('dotenv').config();
 const path = require('path');
 const helmet = require('helmet');
+const cors = require('cors');
 const express = require('express');
 const server = express();
 const sitemap = require('express-sitemap')();
@@ -16,6 +17,7 @@ server.set('views', path.join(__dirname, 'views'));
 server.use(express.static(__dirname));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
+server.use(cors());
 // sitemap.generate(server);
 
 // server.use(session({
