@@ -96,27 +96,24 @@ module.exports = async (client) => {
     });
 
     server.get('/avatar', async (req, res) => {
-        try { 
-            let base64 = await require('../util/imageUrlToBase64')(
-                client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })
-            );
-     
-            const base64Data = base64.replace(/^data:image\/png;base64,/, '');
-     
-            const imgBuffer = Buffer.from(base64Data, 'base64');
-     
-            res.writeHead(200, {
+        try {
+            const avatarUrl = client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 });
+            const base64 = await require('../util/imageUrlToBase64')(avatarUrl);
+            const imgBuffer = Buffer.from(base64.replace(/^data:image\/png;base64,/, ''), 'base64');
+    
+            res.set({
                 'Content-Type': 'image/png',
-                'Content-Length': imgBuffer.length,
-                'Cache-Control': 'public, max-age=60'
+                'Access-Control-Allow-Origin': '*', 
+                'Cache-Control': 'public, max-age=60',
             });
-     
-            res.end(imgBuffer);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ status: 500, message: 'Gagal memuat gambar.' });
+    
+            res.send(imgBuffer);
+        } catch (e) {
+            console.error(e);
+            res.status(500).send('Gagal memuat avatar');
         }
     });
+    
 
     let port = process.env.PORT || 4000;
     server.listen(port, () => {
