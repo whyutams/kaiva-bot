@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const moment = require('moment');
 require('moment/locale/id');
 moment.locale('id');
@@ -49,6 +49,22 @@ module.exports = {
             })
             .setTimestamp()
 
-        await interaction.reply({ embeds: [embed] });
+        if (process.env.SUPPORT_WEB) {
+            const button = new ButtonBuilder()
+                .setLabel('🔗 Support Web')
+                .setStyle(ButtonStyle.Link)
+                .setURL(process.env.SUPPORT_WEB);
+
+            const row = new ActionRowBuilder().addComponents(button);
+
+            await interaction.reply({
+                embeds: [embed],
+                components: [row],
+            });
+        } else {
+            await interaction.reply({
+                embeds: [embed]
+            });
+        }
     }
 };
