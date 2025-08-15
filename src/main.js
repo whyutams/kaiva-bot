@@ -91,6 +91,17 @@ client.on('messageCreate', async (message) => {
 
     const client = message.client;
 
+    if (message.content == `<@${client.user.id}>` || message.content == `<@!${client.user.id}>`) {
+        const embed = new djs.EmbedBuilder()
+            .setDescription(`Ketik \`/help\` untuk melihat daftar commands.`)
+            .setColor(client.mainColor)
+            .setTimestamp();
+
+        message.channel.send({
+            embeds: [embed]
+        }).catch(e => { });
+    }
+
     if (client.afkUsers.has(message.author.id)) {
         client.afkUsers.delete(message.author.id);
         message.reply({
