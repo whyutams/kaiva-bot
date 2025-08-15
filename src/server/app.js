@@ -18,7 +18,7 @@ server.use(express.static(__dirname));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cors());
-sitemap.generate(server);
+// sitemap.generate(server);
 
 // server.use(session({
 //     secret: 'supersecretkey',
