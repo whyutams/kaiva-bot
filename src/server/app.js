@@ -95,6 +95,23 @@ module.exports = async (client) => {
             }
         }
 
+        let added_server_name = null, guild_id = req.query.guild_id || null;
+
+        if (!added_server_name && guild_id) {
+            try {
+                added_server_name = client.guilds.cache.get(guild_id).name;
+            } catch (e) {
+                console.error("Gagal fetch developer:", e);
+            }
+        } else {
+            res.redirect("/");
+
+            return;
+        }
+
+        console.log(`Server Name: ${added_server_name} | Server ID: ${guild_id}`);
+        
+
         res.render("appreciate-page", {
             is_commands_page: true,
             id: client.user.id,
@@ -102,6 +119,7 @@ module.exports = async (client) => {
             avatar: await require('../util/image-conversion')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false })),
             avatar_hd: await require('../util/image-conversion')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
             server_count: client.guilds.cache.size,
+            server_name: added_server_name,
             user_count: client.guilds.cache.reduce((acc, g) => acc + g.memberCount, 100),
             version: client.botVersion,
             developer: {
