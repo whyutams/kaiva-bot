@@ -55,7 +55,6 @@ module.exports = async (client) => {
                 avatar_hd: await require('../util/imageUrlToBase64')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
             },
             slash_commands: client.slashCommandsJSON,
-            invite_url: client.inviteUrl,
         });
     });
 
@@ -84,8 +83,11 @@ module.exports = async (client) => {
                 avatar_hd: await require('../util/imageUrlToBase64')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
             },
             slash_commands: client.slashCommandsJSON,
-            invite_url: client.inviteUrl,
         });
+    });
+
+    server.get('/invite', async (req, res) => {
+        res.redirect(client.inviteUrl);
     });
 
     server.get("/test", async (req, res) => {
@@ -103,7 +105,7 @@ module.exports = async (client) => {
             res.status(500).send('Gagal memuat avatar');
         }
     });
-    
+
 
     let port = process.env.PORT || 4000;
     server.listen(port, () => {
