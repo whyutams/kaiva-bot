@@ -56,7 +56,7 @@ const truths = [
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('truth')
-        .setDescription('Dapatkan pertanyaan Truth secara acak!'),
+        .setDescription('Memberikan pertanyaan Truth secara acak!'),
 
     async execute(interaction) {
         const pertanyaan = truths[Math.floor(Math.random() * truths.length)];

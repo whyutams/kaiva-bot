@@ -34,7 +34,7 @@ const dares = [
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('dare')
-        .setDescription('Dapatkan tantangan Dare secara acak!'),
+        .setDescription('Memberikan pertanyaan Dare secara acak!'),
 
     async execute(interaction) {
         const challenge = dares[Math.floor(Math.random() * dares.length)];
