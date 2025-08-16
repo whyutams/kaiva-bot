@@ -108,8 +108,6 @@ module.exports = async (client) => {
 
             return;
         }
-
-        console.log(`Server Name: ${added_server_name} | Server ID: ${guild_id}`);
         
 
         res.render("appreciate-page", {
