@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const express = require('express');
 const server = express();
-// const sitemap = require('express-sitemap')();
+const sitemap = require('express-sitemap')();
 // const session = require('express-session');
 
 
@@ -43,16 +43,16 @@ module.exports = async (client) => {
             is_commands_page: false,
             id: client.user.id,
             username: client.user.username,
-            avatar: client.user.displayAvatarURL({ extension: 'png', forceStatic: false }),
-            avatar_hd: client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
+            avatar: await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false })),
+            avatar_hd: await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
             server_count: client.guilds.cache.size,
             user_count: client.guilds.cache.reduce((acc, g) => acc + g.memberCount, 100),
             version: client.botVersion,
             developer: {
                 id: owner?.id,
                 username: owner?.username,
-                avatar: owner?.displayAvatarURL({ extension: 'png', forceStatic: false }),
-                avatar_hd: owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
+                avatar: await require('../util/imageUrlToBase64')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false })),
+                avatar_hd: await require('../util/imageUrlToBase64')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
             },
             slash_commands: client.slashCommandsJSON,
             invite_url: client.inviteUrl,
@@ -72,16 +72,16 @@ module.exports = async (client) => {
             is_commands_page: true,
             id: client.user.id,
             username: client.user.username,
-            avatar: client.user.displayAvatarURL({ extension: 'png', forceStatic: false }),
-            avatar_hd: client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
+            avatar: await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false })),
+            avatar_hd: await require('../util/imageUrlToBase64')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
             server_count: client.guilds.cache.size,
             user_count: client.guilds.cache.reduce((acc, g) => acc + g.memberCount, 100),
             version: client.botVersion,
             developer: {
                 id: owner?.id,
                 username: owner?.username,
-                avatar: owner?.displayAvatarURL({ extension: 'png', forceStatic: false }),
-                avatar_hd: owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
+                avatar: await require('../util/imageUrlToBase64')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false })),
+                avatar_hd: await require('../util/imageUrlToBase64')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
             },
             slash_commands: client.slashCommandsJSON,
             invite_url: client.inviteUrl,
