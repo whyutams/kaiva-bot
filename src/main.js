@@ -19,7 +19,8 @@ client.slashCommands = new djs.Collection();
 client.slashCommandsJSON = [];
 client.snipes = new Map();
 client.afkUsers = new djs.Collection();
-client.inviteUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&permissions=8&scope=bot%20applications.commands`;
+if(process.env.SUPPORT_WEB) client.inviteUrl = `https://discord.com/oauth2/authorize?client_id=${process.env.CLIENT_ID}&scope=bot&permissions=139586956352&redirect_uri=${process.env.SUPPORT_WEB}thank-you`;
+else client.inviteUrl = `https://discord.com/oauth2/authorize?client_id=${process.env.CLIENT_ID}&scope=bot&permissions=139586956352`;
 
 const rcmd = require('./util/register-commands');
 const commandFiles = fs.readdirSync(path.join(__dirname, './slashCommands')).filter(file => file.endsWith('.js'));
