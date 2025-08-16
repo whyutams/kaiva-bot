@@ -101,14 +101,14 @@ module.exports = async (client) => {
             try {
                 added_server_name = client.guilds.cache.get(guild_id).name;
             } catch (e) {
-                console.error("Gagal fetch developer:", e);
+                res.redirect("/");
+                return;
             }
         } else {
             res.redirect("/");
 
             return;
         }
-        
 
         res.render("appreciate-page", {
             is_commands_page: true,
