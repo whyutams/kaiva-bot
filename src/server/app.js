@@ -95,7 +95,7 @@ module.exports = async (client) => {
             }
         }
 
-        res.render("appriciate-page", {
+        res.render("appreciate-page", {
             is_commands_page: true,
             id: client.user.id,
             username: client.user.username,
