@@ -25,7 +25,7 @@ server.use(cors());
 //     resave: false,
 //     saveUninitialized: true,
 //     cookie: { secure: false }
-// }));
+// });
 
 module.exports = async (client) => {
     let owner = null;
@@ -43,16 +43,16 @@ module.exports = async (client) => {
             is_commands_page: false,
             id: client.user.id,
             username: client.user.username,
-            avatar: await require('../util/image-conversion')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false })),
-            avatar_hd: await require('../util/image-conversion')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
+            avatar: client.user.displayAvatarURL({ extension: 'png', forceStatic: false }),
+            avatar_hd: client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
             server_count: client.guilds.cache.size,
             user_count: client.guilds.cache.reduce((acc, g) => acc + g.memberCount, 100),
             version: client.botVersion,
             developer: {
                 id: owner?.id,
                 username: owner?.username,
-                avatar: await require('../util/image-conversion')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false })),
-                avatar_hd: await require('../util/image-conversion')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
+                avatar: owner?.displayAvatarURL({ extension: 'png', forceStatic: false }),
+                avatar_hd: owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
             },
             slash_commands: await require('../util/array-shuffle')(client.slashCommandsJSON),
         });
@@ -71,16 +71,16 @@ module.exports = async (client) => {
             is_commands_page: true,
             id: client.user.id,
             username: client.user.username,
-            avatar: await require('../util/image-conversion')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false })),
-            avatar_hd: await require('../util/image-conversion')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
+            avatar: client.user.displayAvatarURL({ extension: 'png', forceStatic: false }),
+            avatar_hd: client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
             server_count: client.guilds.cache.size,
             user_count: client.guilds.cache.reduce((acc, g) => acc + g.memberCount, 100),
             version: client.botVersion,
             developer: {
                 id: owner?.id,
                 username: owner?.username,
-                avatar: await require('../util/image-conversion')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false })),
-                avatar_hd: await require('../util/image-conversion')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
+                avatar: owner?.displayAvatarURL({ extension: 'png', forceStatic: false }),
+                avatar_hd: owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
             },
             slash_commands: client.slashCommandsJSON,
         });
@@ -114,8 +114,8 @@ module.exports = async (client) => {
             is_commands_page: true,
             id: client.user.id,
             username: client.user.username,
-            avatar: await require('../util/image-conversion')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false })),
-            avatar_hd: await require('../util/image-conversion')(client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
+            avatar: client.user.displayAvatarURL({ extension: 'png', forceStatic: false }),
+            avatar_hd: client.user.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
             server_count: client.guilds.cache.size,
             server_name: added_server_name,
             user_count: client.guilds.cache.reduce((acc, g) => acc + g.memberCount, 100),
@@ -123,8 +123,8 @@ module.exports = async (client) => {
             developer: {
                 id: owner?.id,
                 username: owner?.username,
-                avatar: await require('../util/image-conversion')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false })),
-                avatar_hd: await require('../util/image-conversion')(owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 })),
+                avatar: owner?.displayAvatarURL({ extension: 'png', forceStatic: false }),
+                avatar_hd: owner?.displayAvatarURL({ extension: 'png', forceStatic: false, size: 2048 }),
             },
             slash_commands: client.slashCommandsJSON,
         });
